@@ -23,9 +23,9 @@ class OpenMMConfig(MolecularDynamicsTaskConfig):
     # Reference PDB file used to compute RMSD and align point cloud
     reference_pdb_file: Optional[Path]
     # Atom selection for openmm
-    openmm_selection: List[str] = ["CA"]
+    openmm_selection: List[str] = ["CA", "LIG"]
     # Atom selection for MDAnalysis
-    mda_selection: str = "protein and name CA"
+    mda_selection: str = "(protein and name CA) or resname LIG"
     # Distance threshold to use for computing contact (in Angstroms)
     threshold: float = 8.0
     # Write contact maps to HDF5
@@ -34,6 +34,8 @@ class OpenMMConfig(MolecularDynamicsTaskConfig):
     point_cloud: bool = True
     # Write fraction of contacts to HDF5
     fraction_of_contacts: bool = True
+    # Write heavy atom contacts to HDF5
+    heavy_atom_contacts: bool = True
     # Read outlier trajectory into memory while writing PDB file
     in_memory: bool = True
 

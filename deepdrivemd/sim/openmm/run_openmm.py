@@ -136,6 +136,7 @@ def configure_reporters(
             contact_map=cfg.contact_map,
             point_cloud=cfg.point_cloud,
             fraction_of_contacts=cfg.fraction_of_contacts,
+            heavy_atom_contacts=cfg.heavy_atom_contacts
         )
     )
 
