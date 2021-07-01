@@ -25,7 +25,9 @@ class OpenMMConfig(MolecularDynamicsTaskConfig):
     # Atom selection for openmm
     openmm_selection: List[str] = ["CA", "LIG"]
     # Atom selection for MDAnalysis
-    mda_selection: str = "(protein and name CA) or resname LIG"
+    mda_selection: str = "protein and name CA"
+    # Atom selection of ligand for MDAnalysis
+    mda_lig_selection: str = "resname LIG and not name H*"
     # Distance threshold to use for computing contact (in Angstroms)
     threshold: float = 8.0
     # Write contact maps to HDF5

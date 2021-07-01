@@ -132,6 +132,7 @@ def configure_reporters(
             reference_pdb_file=ctx.reference_pdb_file,
             openmm_selection=cfg.openmm_selection,
             mda_selection=cfg.mda_selection,
+            mda_lig_selection=cfg.mda_lig_selection,
             threshold=cfg.threshold,
             contact_map=cfg.contact_map,
             point_cloud=cfg.point_cloud,
