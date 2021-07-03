@@ -23,7 +23,7 @@ class OpenMMConfig(MolecularDynamicsTaskConfig):
     # Reference PDB file used to compute RMSD and align point cloud
     reference_pdb_file: Optional[Path]
     # Atom selection for openmm
-    openmm_selection: List[str] = ["CA", "LIG"]
+    openmm_selection: List[str] = ["CA"]
     # Atom selection for MDAnalysis
     mda_selection: str = "protein and name CA"
     # Atom selection of ligand for MDAnalysis
