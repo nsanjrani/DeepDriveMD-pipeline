@@ -131,6 +131,10 @@ def get_extrinsic_score(
         extrinsic_scores, extrinsic_inds = bestk(
             intrinsic_rmsds, k=cfg.num_extrinsic_outliers
         )
+    elif cfg.extrinsic_score == "heavy_atom_contacts":
+        heavy_atoms = parse_h5(virtual_h5_file, fields=["heavy_atom_contacts"])["heavy_atom_contacts"]
+        intrinsic_contacts = heavy_atoms[intrinsic_inds]
+        extrinsic_scores, extrinsic_inds = bestk(intrinsic_contacts, k=cfg.num_extrinsic_outliers, smallest=False)
     else:
         # If no extrinsic_score, simply return the intrinsic selection
         extrinsic_inds = np.arange(cfg.num_extrinsic_outliers)
