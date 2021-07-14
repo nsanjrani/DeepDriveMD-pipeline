@@ -43,7 +43,7 @@ class OutlierDetectionConfig(AgentTaskConfig):
         intrinsic_score = values.get("intrinsic_score")
         extrinsic_score = values.get("extrinsic_score")
         valid_intrinsic_scores = {"lof", "dbscan", None}
-        valid_extrinsic_scores = {"rmsd", None}
+        valid_extrinsic_scores = {"rmsd", "heavy_atom_contacts", None}
         if intrinsic_score is None and extrinsic_score is None:
             raise ValueError("intrinsic_score and extrinsic_score cannot both be None.")
         if intrinsic_score not in valid_intrinsic_scores:
