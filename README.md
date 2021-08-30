@@ -8,7 +8,18 @@ Details can be found in the [ducumentation](https://deepdrivemd-pipeline.readthe
 
 ## How to run
 
-### Setup
+### Summit HPC pre-existing environments on RHEL8
+
+Copy pre-existing conda environments into new ones. Two different conda environments are needed, one for the MD stage, and the other for the ML and other stages. 
+
+```
+conda create --clone /gpfs/alpine/world-shared/chm155/hrlee/conda/openmm --name conda-ddmd
+conda create --clone /gpfs/alpine/world-shared/chm155/hrlee/conda/pytorch-1.6.0_cudnn-8.0.2.39_nccl-2.7.8-1_static_mlperf --name conda-pytorch
+```
+
+If more changes are made to any packages (`DeepDriveMD` or `MD-Tools`), simply pull these changes using `git pull` and run `pip install -e .` in the conda environment, as described below. 
+
+### Manual setup
 
 Install `deepdrivemd` into a virtualenv with:
 
@@ -66,3 +77,27 @@ data/sys2:
 comp.pdb comp.top
 ```
 Where the topology files are optional and only used when `molecular_dynamics_stage.task_config.solvent_type` is "explicit". Only one system directory is needed but an arbitrary number are supported. Also note that the system directory names are arbitrary. The path to the `data` directory should be passed into the config via `molecular_dynamics_stage.initial_pdb_dir`.
+
+
+## Running DDMD for protein-ligand interactions
+Clone `DeepDriveMD` from this fork then change to the GitHub branch `ligand_protein` and pull these changes, this should give access to the `heavy_atom_contacts` functionality.
+
+A test system of the RQN ligand in 3CLPro is included under the `3clpro_rqn_unbound` folder, with the ligand bound pdb (`3clpro_final_solv_bound.pdb`) and the ligand unbound (`system/3clpro_final_solv.pdb`). This should be run on Summit.
+
+Alternatively, another test system of the biotin ligand bound in streptavidin is included under the `protlig_exp` folder with a corresponding yaml file (`deepdrivemd_bridges.yaml`) to be run on the Bridges-2 cluster.
+
+Additionally, a yaml file is included outside the folder (`deepdrivemd_rqn.yaml`) which can be run on Summit using the same commands as above:
+
+```
+python -m deepdrivemd.deepdrivemd -c deepdrivemd_rqn.yaml
+```
+
+Ensure you are in the `DeepDriveMD-pipeline` cloned git repository when launching this, and that the `conda-ddmd` environment is activated.
+
+### Resource for creating AMBER input files
+
+Biotin in streptavidin system:
+https://ringo.ams.stonybrook.edu/index.php/2012_AMBER_Tutorial_with_Biotin_and_Streptavidin#Biotin_and_Streptavidin
+
+Building systems in explicit solvent:
+https://ambermd.org/tutorials/basic/tutorial7/index.php#Use_LEaP_to_Build_a_Protein_System_in_Explicit_Solvent
