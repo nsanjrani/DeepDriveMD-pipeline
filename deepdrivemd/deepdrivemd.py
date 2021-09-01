@@ -267,7 +267,11 @@ if __name__ == "__main__":
         num_full_nodes = cfg.molecular_dynamics_stage.num_tasks
         extra_gpus = 0
     extra_node = int(extra_gpus > 0)
-    num_nodes = max(1, num_full_nodes + extra_node)
+    
+    if (cfg.resource == "ornl.summit") and (cfg.queue == "batch") and (str(cfg.walltime_min) == "720"):
+        num_nodes = 100
+    else:
+        num_nodes = max(1, num_full_nodes + extra_node)
 
     appman.resource_desc = {
         "resource": cfg.resource,
