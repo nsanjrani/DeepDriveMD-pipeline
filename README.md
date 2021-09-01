@@ -82,7 +82,7 @@ Where the topology files are optional and only used when `molecular_dynamics_sta
 ## Running DDMD for protein-ligand interactions
 Clone `DeepDriveMD` from this fork then change to the GitHub branch `ligand_protein` and pull these changes, this should give access to the `heavy_atom_contacts` functionality.
 
-A test system of the RQN ligand in 3CLPro is included under the `3clpro_rqn_unbound` folder, with the ligand bound pdb (`3clpro_final_solv_bound.pdb`) and the ligand unbound (`system/3clpro_final_solv.pdb`). This should be run on Summit.
+A test system of the RQN ligand in 3CLPro is included under the `3clpro_unbound` folder, with the ligand bound pdb (`complex_rqn_bound.pdb`) and the ligand unbound (`system/complex_rqn_unbound.pdb`). This should be run on Summit.
 
 Alternatively, another test system of the biotin ligand bound in streptavidin is included under the `protlig_exp` folder with a corresponding yaml file (`deepdrivemd_bridges.yaml`) to be run on the Bridges-2 cluster.
 
